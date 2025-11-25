@@ -21,8 +21,8 @@ Aplicación REST desarrollada en Spring Boot que proporciona un API para la gest
 
 ### 1. Clonar el Repositorio
 ```bash
-git clone https://github.com/tu-usuario/api-usuarios.git
-cd api-usuarios
+git clone https://github.com/JJAR140201/prueba-NTTADATA-Chile
+cd prueba-NTTADATA-Chile
 ```
 
 ### 2. Compilar el Proyecto
@@ -377,45 +377,14 @@ curl -X DELETE http://localhost:8080/api/usuarios/550e8400-e29b-41d4-a716-446655
 
 ## Diagrama de Solución
 
-```
-┌─────────────────────────────────────────────────────┐
-│                   Cliente HTTP                      │
-└────────────┬────────────────────────────────────────┘
-             │
-             ▼
-┌─────────────────────────────────────────────────────┐
-│            Spring Boot Application                  │
-│  ┌───────────────────────────────────────────────┐  │
-│  │         UsuarioController (REST)              │  │
-│  └───────┬───────────────────────────────────────┘  │
-│          │                                          │
-│  ┌───────▼───────────────────────────────────────┐  │
-│  │  JWT Filter (Autenticación y Autorización)   │  │
-│  └───────┬───────────────────────────────────────┘  │
-│          │                                          │
-│  ┌───────▼───────────────────────────────────────┐  │
-│  │    UsuarioService (Lógica de Negocio)        │  │
-│  │ - Validaciones (correo, contraseña)          │  │
-│  │ - Manejo de JWT                              │  │
-│  │ - Encriptación de contraseñas                │  │
-│  └───────┬───────────────────────────────────────┘  │
-│          │                                          │
-│  ┌───────▼───────────────────────────────────────┐  │
-│  │  UsuarioRepository (Acceso a Datos)          │  │
-│  │  - Spring Data JPA                           │  │
-│  └───────┬───────────────────────────────────────┘  │
-│          │                                          │
-└──────────┼──────────────────────────────────────────┘
-           │
-           ▼
-┌─────────────────────────────────────────────────────┐
-│         Base de Datos H2 (En Memoria)               │
-│  ┌──────────────────────────────────────────────┐   │
-│  │ Tabla: usuarios                              │   │
-│  │ Tabla: telefonos                             │   │
-│  └──────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────┘
-```
+### Diagrama de Arquitectura - Componentes y Capas
+![Arquitectura Componentes y Capas](images/DIAGRAMA%20DE%20ARQUITECTURA%20Componentes-Capas.png)
+
+### Diagrama de Clases UML Completo
+![Diagrama de Clases UML](images/DIAGRAMA%20DE%20CLASES%20UML%20COMPLETO.png)
+
+### Diagrama de Secuencia - POST
+![Diagrama de Secuencia POST](images/DIAGRAMA%20DE%20SECUENCIA–POST.png)
 
 ## Contribuciones
 
@@ -433,7 +402,7 @@ Este proyecto está bajo la Licencia MIT.
 ## Contacto
 
 **NTTA Data Chile**
-- Website: https://www.nttadata.com
+- Website: https://co.nttdata.com/
 - Email: contacto@nttadata.com
 
 ## Soporte
