@@ -35,29 +35,50 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-La aplicación estará disponible en: `http://localhost:8080`
+La aplicación estará disponible en: `http://localhost:8081`
+
+(Puerto configurado en `application.properties`)
 
 ## Estructura de la Aplicación
 
+### Arquitectura Hexagonal (Ports & Adapters)
+
+La aplicación está estructurada en 4 capas independientes:
+
 ```
-src/
-├── main/
-│   ├── java/rawson/prueba/
-│   │   ├── config/           # Configuraciones (JWT, Security, Swagger)
-│   │   ├── controller/       # Controladores REST
-│   │   ├── dto/              # Data Transfer Objects
-│   │   ├── entity/           # Entidades JPA
-│   │   ├── repository/       # Repositorios Spring Data JPA
-│   │   ├── service/          # Lógica de negocio
-│   │   ├── util/             # Utilidades (JWT, Validaciones)
-│   │   └── PruebaApplication.java
-│   └── resources/
-│       └── application.properties
-└── test/
-    └── java/rawson/prueba/
-        ├── controller/       # Tests de controladores
-        └── service/          # Tests de servicios
+src/main/java/rawson/prueba/
+│
+├── domain/                              ← 🎯 DOMINIO (Núcleo independiente)
+│   ├── entity/                          # Entidades: Usuario, Telefono
+│   ├── port/                            # Puertos (Interfaces): UsuarioRepositoryPort, SecurityPort, ValidacionPort
+│   └── exception/                       # Excepciones: UsuarioNoEncontradoException
+│
+├── application/                         ← 📱 APLICACIÓN (Casos de uso)
+│   ├── usecase/                         # 4 casos de uso independientes
+│   │   ├── CrearUsuarioUseCase
+│   │   ├── ObtenerUsuariosUseCase
+│   │   ├── ActualizarUsuarioUseCase
+│   │   └── EliminarUsuarioUseCase
+│   ├── dto/                             # Data Transfer Objects (DTOs)
+│   └── UsuarioApplicationService.java   # Orquestador de casos de uso
+│
+├── infrastructure/                      ← 🔧 INFRAESTRUCTURA (Implementaciones técnicas)
+│   ├── persistence/                     # Adaptadores de persistencia (JPA, Spring Data)
+│   ├── security/                        # Adaptador de seguridad (JWT, BCrypt)
+│   └── util/                            # Adaptadores de validación (Regex)
+│
+└── interfaces/                          ← 🌐 INTERFACES (Adaptadores de entrada/salida)
+    ├── adapters/rest/controller/        # Controladores REST (@RestController)
+    └── config/                          # Configuraciones Spring (JWT, Security, Swagger)
 ```
+
+### Ventajas de la Arquitectura Hexagonal
+
+✅ **Testabilidad**: Los casos de uso son POJOs sin dependencias de Spring  
+✅ **Flexibilidad**: Cambiar tecnología sin tocar la lógica de negocio  
+✅ **Claridad**: Separación clara de responsabilidades  
+✅ **Escalabilidad**: Fácil agregar nuevas features y adaptadores  
+✅ **Independencia**: El dominio no conoce ninguna tecnología external
 
 ## Endpoints de la API
 
@@ -204,13 +225,13 @@ Por defecto, los tokens expiran después de 24 horas (86400000 ms).
 Una vez la aplicación esté en ejecución, puede acceder a la documentación interactiva de Swagger en:
 
 ```
-http://localhost:8080/swagger-ui.html
+http://localhost:8081/swagger-ui.html
 ```
 
 O acceder a los JSON de la especificación OpenAPI en:
 
 ```
-http://localhost:8080/v3/api-docs
+http://localhost:8081/v3/api-docs
 ```
 
 ## Consola H2
@@ -218,7 +239,7 @@ http://localhost:8080/v3/api-docs
 Para ver la base de datos en memoria durante el desarrollo:
 
 ```
-http://localhost:8080/h2-console
+http://localhost:8081/h2-console
 ```
 
 **Configuración:**
@@ -312,7 +333,7 @@ TELEFONOS
 
 ### 1. Crear un usuario
 ```bash
-curl -X POST http://localhost:8080/api/usuarios \
+curl -X POST http://localhost:8081/api/usuarios \
   -H "Content-Type: application/json" \
   -d '{
     "nombre": "Juan Rodriguez",
@@ -338,13 +359,13 @@ Respuesta:
 
 ### 2. Usar el token para obtener el usuario
 ```bash
-curl -X GET http://localhost:8080/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
+curl -X GET http://localhost:8081/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
   -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9..."
 ```
 
 ### 3. Actualizar el usuario
 ```bash
-curl -X PUT http://localhost:8080/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
+curl -X PUT http://localhost:8081/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9..." \
   -d '{
@@ -357,7 +378,7 @@ curl -X PUT http://localhost:8080/api/usuarios/550e8400-e29b-41d4-a716-446655440
 
 ### 4. Eliminar el usuario
 ```bash
-curl -X DELETE http://localhost:8080/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
+curl -X DELETE http://localhost:8081/api/usuarios/550e8400-e29b-41d4-a716-446655440000 \
   -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9..."
 ```
 
