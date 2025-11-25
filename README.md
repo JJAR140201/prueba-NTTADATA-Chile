@@ -17,6 +17,225 @@ Aplicación REST desarrollada en Spring Boot que proporciona un API para la gest
 - **Testing**: JUnit 5 y Mockito
 - **Construcción**: Maven
 
+## Ventajas de Tecnologías Utilizadas y Razones de Uso
+
+### 🚀 Spring Boot 3.1.5
+
+**Ventajas:**
+- ✅ **Configuración Automática**: Proporciona auto-configuración inteligente que reduce la boilerplate code
+- ✅ **Inicio Rápido**: Permite crear aplicaciones REST en minutos sin configuración compleja
+- ✅ **Ecosistema Robusto**: Integración seamless con Spring Data, Spring Security, Spring Cloud
+- ✅ **Producción Ready**: Incluye actuators, health checks, métricas para monitoreo
+- ✅ **Java Moderno**: Soporta Java 17 con todas las características modernas del lenguaje
+- ✅ **Embedded Server**: Tomcat embebido, no requiere servidor externo
+
+**Razones de Uso:**
+- Es el estándar de facto en la industria para aplicaciones Java/REST
+- Permite desarrollo rápido manteniendo calidad enterprise
+- Excelente soporte y comunidad activa
+- Compatible con arquitectura hexagonal
+
+---
+
+### 💾 H2 Database (En Memoria)
+
+**Ventajas:**
+- ✅ **Sin Instalación**: No requiere servidor externo, se ejecuta en memoria
+- ✅ **Ideal para Desarrollo**: Perfecto para testing y desarrollo local
+- ✅ **Consola Web Integrada**: Interfaz visual para inspeccionar datos en tiempo real
+- ✅ **Velocidad**: Extremadamente rápida al estar en RAM
+- ✅ **SQL Estándar**: Compatible con SQL estándar, fácil migración a BD de producción
+- ✅ **Reseteo Automático**: Se limpia automáticamente al reiniciar la aplicación
+
+**Razones de Uso:**
+- Perfecto para fase de desarrollo sin infraestructura compleja
+- Eliminates frición en ambiente local
+- Facilita CI/CD sin dependencias externas
+- Permite testing determinista sin efectos secundarios
+
+---
+
+### 🗄️ Hibernate/JPA (Object-Relational Mapping)
+
+**Ventajas:**
+- ✅ **Abstracción de Base de Datos**: Código independiente del motor SQL específico
+- ✅ **Mapeo Automático**: Convierte automáticamente objetos Java en registros SQL
+- ✅ **Queries Type-Safe**: Criteria API y QueryDSL para queries sin SQL raw strings
+- ✅ **Lazy Loading**: Carga datos bajo demanda optimizando memoria
+- ✅ **Transacciones Automáticas**: Gestión automática de transacciones ACID
+- ✅ **Cascading**: Gestión automática de relaciones parent-child
+- ✅ **Change Tracking**: Detecta cambios automáticamente para updates
+
+**Razones de Uso:**
+- Elimina tediosa tarea de mapear SQL a objetos Java
+- Permite cambiar BD sin cambiar código de aplicación
+- Previene SQL Injection mediante parametrización automática
+- Mejor mantenibilidad y menos errores manuales
+
+---
+
+### 🔐 JWT (JSON Web Tokens)
+
+**Ventajas:**
+- ✅ **Stateless Authentication**: No requiere sesiones en el servidor
+- ✅ **Escalabilidad**: Perfecto para microservicios y load balancing
+- ✅ **Información Encapsulada**: El token contiene claims/información del usuario
+- ✅ **Seguridad Criptográfica**: Tokens firmados digitalmente, imposibles de falsificar
+- ✅ **Cross-Domain/CORS**: Funciona perfectamente con CORS y múltiples dominios
+- ✅ **Mobile-Friendly**: Ideal para aplicaciones móviles que no soportan cookies
+- ✅ **Autorización Granular**: Permite codificar permisos directamente en el token
+
+**Razones de Uso:**
+- Estándar moderno para autenticación en APIs REST
+- Escalable horizontalmente sin estado en servidor
+- Elimina vulnerabilidades de session hijacking
+- Mejor experiencia en aplicaciones distribuidas
+
+---
+
+### 📚 Swagger/OpenAPI 3.0
+
+**Ventajas:**
+- ✅ **Documentación Automática**: Genera documentación del API directamente del código
+- ✅ **Interfaz Interactiva**: Consola web para probar endpoints sin Postman
+- ✅ **Client Generators**: Genera clientes para diferentes lenguajes automáticamente
+- ✅ **Especificación Estándar**: OpenAPI 3.0 es estándar de la industria
+- ✅ **Sincronización Automática**: La documentación siempre está actualizada con el código
+- ✅ **Validación Automática**: Valida las respuestas contra el esquema definido
+- ✅ **Facilita Integración**: Terceros pueden consumir la API sabiendo exactamente qué esperar
+
+**Razones de Uso:**
+- Elimina documentación manual que se desactualiza
+- Reduce tiempo de onboarding para nuevos developers
+- Herramienta crítica para comunicación entre equipos frontend/backend
+- Esencial para APIs públicas
+
+---
+
+### 🧪 JUnit 5 y Mockito
+
+**Ventajas:**
+
+**JUnit 5:**
+- ✅ **Arquitectura Modular**: Separa testing framework de execution engine
+- ✅ **Anotaciones Mejoradas**: @Test, @BeforeEach, @ParameterizedTest más poderosas
+- ✅ **Display Names Personalizados**: `@DisplayName("descripción legible")` para reportes claros
+- ✅ **Extensibilidad**: Sistema de extensiones para custom behavior
+- ✅ **Soporte Paralelización**: Ejecuta tests en paralelo para feedback más rápido
+
+**Mockito:**
+- ✅ **Mocking Simplificado**: API clara y legible para crear mocks
+- ✅ **Stubbing Flexible**: Define comportamiento de dependencias fácilmente
+- ✅ **Verificación de Interacciones**: Valida que métodos fueron llamados correctamente
+- ✅ **Inyección de Mocks**: `@Mock` y `@InjectMocks` para tests más limpios
+- ✅ **Spy Objects**: Combina mocks y objetos reales para scenarios complejos
+
+**Razones de Uso:**
+- JUnit 5 es la versión moderna recomendada por la comunidad Java
+- Testing permite validar lógica de negocio sin dependencias externas
+- Mockito elimina la necesidad de crear stubs manuales
+- Tests automáticos capturan regresiones tempranamente
+
+---
+
+### 🔨 Maven 3.11.0
+
+**Ventajas:**
+- ✅ **Gestión de Dependencias Centralizada**: POM.xml define todas las librerías
+- ✅ **Build Reproducible**: Mismo pom.xml en cualquier máquina genera idéntico build
+- ✅ **Ciclo de Vida Estándar**: Fases predefinidas (compile, test, package, deploy)
+- ✅ **Plugin Ecosystem**: Plugins para cualquier tarea imaginable
+- ✅ **Convention Over Configuration**: Estructura de directorios predefinida reduce configuración
+- ✅ **Manejo de Versiones**: Transitive dependency resolution, evita conflicts
+- ✅ **CI/CD Integración**: Perfecto para pipelines de automatización
+
+**Razones de Uso:**
+- Maven es estándar en la industria Java enterprise
+- Gestión de dependencias automática y segura
+- Ciclo de vida bien definido
+- Excelente para proyectos grandes y complejos
+
+---
+
+### 🏗️ Arquitectura Hexagonal (Ports & Adapters)
+
+**Ventajas:**
+- ✅ **Testabilidad Total**: Lógica de negocio sin dependencias externas
+- ✅ **Independencia Tecnológica**: Cambiar BD, framework sin afectar dominio
+- ✅ **Separación de Responsabilidades**: Cada capa tiene una función clara
+- ✅ **Mantenibilidad**: Código organizado y fácil de entender
+- ✅ **Escalabilidad**: Agregar features sin afectar capas existentes
+- ✅ **Flexibilidad**: Múltiples adaptadores de entrada/salida
+- ✅ **Domain-Driven Design**: Enfoque en la lógica de negocio
+
+**Razones de Uso:**
+- Aplicaciones producen en 5+ años, arquitectura permite evolucionar
+- Desacopla lógica de negocio de detalles técnicos
+- Facilita testing sin mock de la aplicación completa
+- Preparado para cambios de tecnología sin reescribir negocio
+
+---
+
+### 🔒 Spring Security + BCrypt
+
+**Ventajas:**
+
+**Spring Security:**
+- ✅ **Autenticación Centralizada**: Un lugar para gestionar quién eres
+- ✅ **Autorización Granular**: Control de acceso por endpoint/método
+- ✅ **CSRF Protection**: Protección contra ataques CSRF automática
+- ✅ **Integración JWT**: Soporte nativo para tokens JWT
+- ✅ **Password Encoding**: Gestión centralizada de encoding
+
+**BCrypt:**
+- ✅ **Hashing Adaptativo**: Se vuelve más lento con el tiempo contra ataques
+- ✅ **Salt Automático**: Previene rainbow table attacks
+- ✅ **Industry Standard**: Usado por gobiernos y grandes corporaciones
+- ✅ **Resistant**: Ningún algoritmo de cracking efectivo conocido
+
+**Razones de Uso:**
+- Seguridad es paramount en aplicaciones de producción
+- BCrypt es 10,000+ iteraciones de salting, no plaintext o MD5
+- Previene breaches masivos si BD es comprometida
+- Spring Security agiliza configuración de autenticación
+
+---
+
+## Comparativa: Por Qué Estas Tecnologías Juntas
+
+| Aspecto | Beneficio |
+|--------|----------|
+| **Desarrollo** | Spring Boot → Setup en minutos sin boilerplate |
+| **Escalabilidad** | JWT + Stateless → Escala horizontalmente sin problemas |
+| **Confiabilidad** | Hibernate + Tests → Menos bugs, cambios seguros |
+| **Documentación** | Swagger → API autodocumentada y siempre actualizada |
+| **Seguridad** | JWT + BCrypt → Tokens seguros, contraseñas hasheadas |
+| **Flexibilidad** | Arquitectura Hexagonal → Cambiar tecnología sin dolor |
+| **Testing** | JUnit5 + Mockito → Tests sin dependencias externas |
+| **Produción** | Maven + Spring Boot → JAR ejecutable listo para deployment |
+
+---
+
+## Stack Total en Resumen
+
+```
+┌─────────────────────────────────────────────┐
+│        SPRING BOOT 3.1.5 (Framework)        │
+├─────────────────────────────────────────────┤
+│  JWT (Autenticación) + BCrypt (Hashing)     │
+│  Hibernate/JPA (ORM) + H2 (Base de Datos)   │
+│  Spring Security (Autorización)             │
+├─────────────────────────────────────────────┤
+│  Swagger/OpenAPI (Documentación)            │
+│  JUnit5 + Mockito (Testing)                 │
+│  Maven 3.11.0 (Build & Dependencias)        │
+├─────────────────────────────────────────────┤
+│  Arquitectura Hexagonal (Design Pattern)    │
+└─────────────────────────────────────────────┘
+```
+
+Este stack proporciona una **aplicación enterprise-ready, segura, testeable, escalable y mantenible** ✅
+
 ## Instalación
 
 ### 1. Clonar el Repositorio
