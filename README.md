@@ -411,5 +411,5 @@ Para reportar problemas o sugerencias, por favor abre un issue en el repositorio
 
 ---
 
-**Última actualización**: Enero 2024
+**Última actualización**: Noviembre 2025
 **Versión**: 1.0.0
